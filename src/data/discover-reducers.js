@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
     case constants.EXPAND_ITEM:
       return {
         ...state,
-        expandedItem: (state.expandedItem === action.id) ? null : action.id
+        expandedItem: state.expandedItem === action.id ? null : action.id
       };
     default:
       return state;

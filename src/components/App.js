@@ -4,14 +4,16 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { Navbar, Classes } from "@blueprintjs/core";
 import Dashboard from "./DashboardContainer";
+import Navbar from "./NavbarContainer";
+import ConnectDialog from "./ConnectDialogContaier";
 import reducers from "../data/reducers";
 
 const Main = () => (
   <BrowserRouter>
     <div>
-      <Navbar className={Classes.DARK}/>
+      <Navbar />
+      <ConnectDialog />
       <Switch>
         <Route exact path="/" component={Dashboard} />
       </Switch>
