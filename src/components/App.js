@@ -1,36 +1,23 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Discover from "./Discover";
-import Account from "./Account";
-import NavMenu from "./NavMenu";
-import Collections from "./Collections";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { withStyles } from "@material-ui/core/styles";
-import withRoot from "../withRoot";
+import { Navbar, Classes } from "@blueprintjs/core";
+import Dashboard from "./DashboardContainer";
 import reducers from "../data/reducers";
 
 const Main = () => (
   <BrowserRouter>
     <div>
-      <NavMenu />
+      <Navbar className={Classes.DARK}/>
       <Switch>
-        <Route exact path="/" component={Discover} />
-        <Route path="/discover" component={Discover} />
-        <Route path="/account" component={Account} />
-        <Route path="/collections" component={Collections} />
+        <Route exact path="/" component={Dashboard} />
       </Switch>
     </div>
   </BrowserRouter>
 );
-
-/**
- * Styles Config
- */
-const styles = theme => ({});
-const MainStyled = withRoot(withStyles(styles)(Main));
 
 /**
  * Redux Config
@@ -41,6 +28,6 @@ const store = createStore(
 );
 export default () => (
   <Provider store={store}>
-    <MainStyled />
+    <Main />
   </Provider>
 );
