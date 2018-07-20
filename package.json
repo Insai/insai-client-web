@@ -6,6 +6,7 @@
     "@blueprintjs/core": "^3.0.1",
     "@blueprintjs/icons": "^3.0.0",
     "moment": "^2.22.2",
+    "plottable": "^3.8.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-mosaic-component": "^1.1.1",
@@ -21,16 +22,22 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "precommit": "pretty-quick staged"
   },
   "proxy": "http://localhost:5000/",
   "devDependencies": {
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^23.4.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "husky": "^0.14.3",
     "jest-fetch-mock": "^1.6.3",
     "jest-localstorage-mock": "^2.2.0",
     "jest-styled-components": "^5.0.1",
+    "prettier": "^1.13.7",
+    "pretty-quick": "^1.6.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.5.3"
   }
