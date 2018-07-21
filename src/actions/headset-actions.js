@@ -99,6 +99,11 @@ export const stopFailure = message => ({
   message
 });
 
+export const receiveData = data => ({
+  type: constants.DATA_SAMPLE,
+  data
+});
+
 // Async
 export const startHeadset = () => dispatch => {
   // Start sampling via socket
@@ -113,7 +118,11 @@ export const startHeadset = () => dispatch => {
     dispatch(startFailure(message))
   );
 
-  socket.on(constants.DATA_SAMPLE, sample => console.log(sample));
+  socket.on(constants.DATA_SAMPLE, sample => {
+    // convert Buffer into json
+    const data = JSON.parse(Buffer.from(sample.data).toString());
+    dispatch(receiveData(data));
+  });
 };
 
 export const stopHeadset = () => dispatch => {

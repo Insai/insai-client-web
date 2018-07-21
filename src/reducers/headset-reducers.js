@@ -1,40 +1,11 @@
 import constants from "../constants/headset-action-types";
-
-/**
- * Headset Connection State
- */
-const initialConnectState = {
-  simulate: true
-};
-
-export const connectReducer = (state = initialConnectState, action) => {
-  switch (action.type) {
-    case constants.SET_CONNECTION_STATE: {
-      return Object.assign({}, state, { ...action.data });
-    }
-    default:
-      return state;
-  }
-};
-
-/**
- * Headset Recording State
- */
-const initialRecordingState = {
-  title: "",
-  tags: [],
-  cloud: false
-};
-
-export const recordReducer = (state = initialRecordingState, action) => {
-  switch (action.type) {
-    case constants.SET_RECORDING_STATE: {
-      return Object.assign({}, state, { ...action.data });
-    }
-    default:
-      return state;
-  }
-};
+import {
+  initialConnectState,
+  connectReducer,
+  initialRecordState,
+  recordReducer
+} from "./headset-config-reducers";
+import dataReducer, { initialDataState } from "./headset-data-reducers";
 
 /**
  * Headset Root State
@@ -42,7 +13,8 @@ export const recordReducer = (state = initialRecordingState, action) => {
 const initialState = {
   showDialog: false,
   connectState: initialConnectState,
-  recordState: initialRecordingState,
+  recordState: initialRecordState,
+  dataState: initialDataState,
   isLoading: false,
   isConnected: false,
   isRecording: false,
@@ -114,6 +86,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         recordState: recordReducer(state.recordState, action)
+      };
+    }
+    case constants.DATA_SAMPLE: {
+      return {
+        ...state,
+        dataState: dataReducer(state.dataState, action)
       };
     }
     default:

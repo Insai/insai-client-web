@@ -14,15 +14,15 @@ import BandPower from "./BandPower";
 const ELEMENT_MAP = {
   a: {
     title: "TimeSeries",
-    component: <TimeSeries />
+    Component: TimeSeries
   },
   b: {
     title: "FFT",
-    component: <FFT />
+    Component: FFT
   },
   c: {
     title: "BandPower",
-    component: <BandPower />
+    Component: BandPower
   },
   new: "New"
 };
@@ -47,16 +47,19 @@ export default class extends Component {
     return (
       <MosaicView
         className="mosaic-blueprint-theme"
-        renderTile={(id, path) => (
-          <MosaicWindow
-            path={path}
-            createNode={() => "new"}
-            title={ELEMENT_MAP[id].title}
-            toolbarControls={[<RemoveButton key="remove" />]}
-          >
-            {ELEMENT_MAP[id].component}
-          </MosaicWindow>
-        )}
+        renderTile={(id, path) => {
+          const { title, Component } = ELEMENT_MAP[id];
+          return (
+            <MosaicWindow
+              path={path}
+              createNode={() => "new"}
+              title={title}
+              toolbarControls={[<RemoveButton key="remove" />]}
+            >
+              {<Component {...this.props} />}
+            </MosaicWindow>
+          );
+        }}
         initialValue={{
           direction: "row",
           first: "a",
