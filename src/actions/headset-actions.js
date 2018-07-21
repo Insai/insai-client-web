@@ -116,6 +116,20 @@ export const startHeadset = () => dispatch => {
   socket.on(constants.DATA_SAMPLE, sample => console.log(sample));
 };
 
+export const stopHeadset = () => dispatch => {
+  // Stop sampling via socket
+  socket.emit(constants.STOP_SAMPLE);
+  dispatch(stop());
+
+  socket.on(constants.STOP_SAMPLE_SUCCESS, message =>
+    dispatch(stopSuccess(message))
+  );
+
+  socket.on(constants.STOP_SAMPLE_FAILURE, message =>
+    dispatch(stopFailure(message))
+  );
+};
+
 /**
  * Connection State
  */

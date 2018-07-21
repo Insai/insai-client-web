@@ -2,7 +2,9 @@ import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import {
   showHeadsetDialog,
-  disconnectHeadset
+  disconnectHeadset,
+  stopHeadset,
+  startHeadset
 } from "../actions/headset-actions";
 
 const mapStateToProps = state => ({
@@ -15,6 +17,12 @@ const mapDispatchToProps = dispatch => ({
   },
   disconnectHeadset() {
     dispatch(disconnectHeadset());
+  },
+  stopHeadset() {
+    dispatch(stopHeadset());
+  },
+  startHeadset() {
+    dispatch(startHeadset());
   }
 });
 

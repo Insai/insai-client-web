@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
     case constants.RESPONSE:
       return { ...state, isLoading: false, items: action.data };
     case constants.SET_ACTIVE: {
-      const itemState = state.items.find(obj => obj.item_id == action.itemId);
+      const itemState = state.items.find(obj => obj.item_id === action.itemId);
       return { ...state, activeItem: itemReducer(itemState, action) };
     }
     default:

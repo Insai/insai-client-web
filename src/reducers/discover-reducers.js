@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         expandedItem: null,
-        items: state.items.filter(item => item.id != action.id)
+        items: state.items.filter(item => item.id !== action.id)
       };
     case constants.EXPAND_ITEM:
       return {

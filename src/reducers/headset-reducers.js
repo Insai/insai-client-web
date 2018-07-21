@@ -86,7 +86,8 @@ export default (state = initialState, action) => {
         message: action.message
       };
     }
-    case constants.START_SAMPLE_SUCCESS || constants.STOP_SAMPLE_FAILURE: {
+    case constants.START_SAMPLE_SUCCESS:
+    case constants.STOP_SAMPLE_FAILURE: {
       return {
         ...state,
         isLoading: false,
@@ -94,7 +95,8 @@ export default (state = initialState, action) => {
         message: action.message
       };
     }
-    case constants.START_SAMPLE_FAILURE || constants.STOP_SAMPLE_SUCCESS: {
+    case constants.START_SAMPLE_FAILURE:
+    case constants.STOP_SAMPLE_SUCCESS: {
       return {
         ...state,
         isLoading: false,
