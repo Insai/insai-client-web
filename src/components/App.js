@@ -6,14 +6,14 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import Dashboard from "./DashboardContainer";
 import Navbar from "./NavbarContainer";
-import ConnectDialog from "./ConnectDialogContaier";
+import HeadsetDialog from "./HeadsetDialogContainer";
 import reducers from "../data/reducers";
 
 const Main = () => (
   <BrowserRouter>
     <div>
       <Navbar />
-      <ConnectDialog />
+      <HeadsetDialog />
       <Switch>
         <Route exact path="/" component={Dashboard} />
       </Switch>

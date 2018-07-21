@@ -1,14 +1,14 @@
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
-import { showConnectDialog } from "../data/ui-actions";
+import { showHeadsetDialog } from "../data/headset-actions";
 
 const mapStateToProps = state => ({
-  ...state.ui
+  ...state.headset
 });
 
 const mapDispatchToProps = dispatch => ({
   openDialog() {
-    dispatch(showConnectDialog(true));
+    dispatch(showHeadsetDialog(true));
   }
 });
 
