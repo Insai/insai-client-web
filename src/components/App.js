@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import Dashboard from "./DashboardContainer";
 import Navbar from "./NavbarContainer";
 import HeadsetDialog from "./HeadsetDialogContainer";
-import reducers from "../data/reducers";
+import reducers from "../reducers";
 
 const Main = () => (
   <BrowserRouter>

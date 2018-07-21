@@ -1,10 +1,12 @@
 import React from "react";
 import { Dialog } from "@blueprintjs/core";
 import ConnectionView from "./ConnectionView";
+import LoadingView from "./LoadingView";
+import RecordingView from "./RecordingView";
 
 export default class extends React.PureComponent {
   render() {
-    console.log(this.props.connectState);
+    const { isConnected, isLoading } = this.props;
     return (
       <Dialog
         icon="info-sign"
@@ -17,7 +19,9 @@ export default class extends React.PureComponent {
         usePortal
         isOpen={this.props.showDialog}
       >
-        <ConnectionView {...this.props} />
+        {isLoading && !isConnected && <LoadingView />}
+        {!isLoading && !isConnected && <ConnectionView {...this.props} />}
+        {isConnected && <RecordingView {...this.props} />}
       </Dialog>
     );
   }

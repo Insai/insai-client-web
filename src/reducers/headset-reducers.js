@@ -57,24 +57,48 @@ export default (state = initialState, action) => {
         showDialog: action.show
       };
     }
-    case constants.CONNECT_HEADSET: {
+    case constants.CONNECT_HEADSET:
+    case constants.DISCONNECT_HEADSET:
+    case constants.START_SAMPLE:
+    case constants.STOP_SAMPLE: {
       return {
         ...state,
         isLoading: true
       };
     }
-    case constants.CONNECT_HEADSET_SUCCESS: {
+    case constants.CONNECT_HEADSET_SUCCESS:
+    case constants.DISCONNECT_HEADSET_FAILURE: {
       return {
         ...state,
         isLoading: false,
-        isConnected: true
+        isConnected: true,
+        isRecording: false,
+        message: action.message
       };
     }
-    case constants.CONNECT_HEADSET_FAILURE: {
+    case constants.CONNECT_HEADSET_FAILURE:
+    case constants.DISCONNECT_HEADSET_SUCCESS: {
       return {
         ...state,
         isLoading: false,
         isConnected: false,
+        isRecording: false,
+        message: action.message
+      };
+    }
+    case constants.START_SAMPLE_SUCCESS || constants.STOP_SAMPLE_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isRecording: true,
+        message: action.message
+      };
+    }
+    case constants.START_SAMPLE_FAILURE || constants.STOP_SAMPLE_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        isRecording: false,
         message: action.message
       };
     }

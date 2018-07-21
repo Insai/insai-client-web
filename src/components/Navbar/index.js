@@ -3,17 +3,22 @@ import { Navbar, Classes, Alignment, Button, Intent } from "@blueprintjs/core";
 
 export default class extends React.PureComponent {
   render() {
-    const { connectState, openDialog } = this.props;
     return (
       <Navbar className={Classes.DARK}>
         <Navbar.Group align={Alignment.RIGHT}>
-          {connectState && connectState.isConnected ? (
-            <Button text="Disconnect" rightIcon="predictive-analysis" />
+          {this.props.isConnected ? (
+            <Button
+              text="Disconnect"
+              rightIcon="predictive-analysis"
+              intent={Intent.DANGER}
+              onClick={this.props.disconnectHeadset}
+              loading={this.props.isLoading}
+            />
           ) : (
             <Button
               text="Connect"
               rightIcon="predictive-analysis"
-              onClick={openDialog}
+              onClick={this.props.openDialog}
               intent={Intent.PRIMARY}
             />
           )}
