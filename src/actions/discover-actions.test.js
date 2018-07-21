@@ -2,7 +2,7 @@ import * as actions from "./discover-actions";
 import constants from "../constants/discover-action-types";
 import discoverListJson from "./__mockData__/discover-list.json";
 import saveItemJson from "./__mockData__/save-item-res.json";
-import configureMockStore from "redux-mock-store";
+import configureMockStore from "../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/redux-mock-store";
 import thunk from "redux-thunk";
 
 // mock redux store
@@ -56,7 +56,7 @@ describe("INTEGRATION TESTS – discover-actions", () => {
     const item = {
       id: "2189758088",
       url: "https://posthook.io"
-    }
+    };
     const expectedActions = [
       {
         type: constants.ITEM.REQUEST_SAVE
@@ -65,12 +65,12 @@ describe("INTEGRATION TESTS – discover-actions", () => {
         type: constants.ITEM.RESPONSE_SAVE,
         data: saveItemJson
       }
-    ]
+    ];
     const store = mockStore({});
     store.dispatch(actions.saveItem(item)).then(() => {
-      const actions = store.getActions()
+      const actions = store.getActions();
       expect(actions).toMatchObject(expectedActions);
       done();
-    })
+    });
   });
 });

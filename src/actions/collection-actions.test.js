@@ -1,6 +1,6 @@
-import * as actions from "./collection-actions";
+import actions from "./collection-actions";
 import constants from "../constants/collection-action-types";
-import configureMockStore from "redux-mock-store";
+import configureMockStore from "../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/redux-mock-store";
 import thunk from "redux-thunk";
 import collectionListJson from "./__mockData__/collect-list.json";
 
@@ -67,7 +67,7 @@ describe("INTEGRATION TESTS – collection-actions", () => {
     const store = mockStore({ items: [] });
 
     store.dispatch(actions.fetchData()).then(() => {
-      const actions = store.getActions()
+      const actions = store.getActions();
       expect(actions).toMatchObject(expectedActions);
       done();
     });

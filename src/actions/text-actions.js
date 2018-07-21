@@ -5,6 +5,6 @@ export const fetchData = () => async dispatch => {
   const res = await fetch("http://localhost:5555/text");
   const data = await res.json();
 
-  console.log(data)
+  console.log(data);
   return data;
 };

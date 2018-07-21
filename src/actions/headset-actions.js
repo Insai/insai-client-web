@@ -10,6 +10,16 @@ export const connect = () => ({
   type: constants.CONNECT_HEADSET
 });
 
+export const connectSuccess = message => ({
+  type: constants.CONNECT_HEADSET_SUCCESS,
+  message
+});
+
+export const connectFailure = message => ({
+  type: constants.CONNECT_HEADSET_FAILURE,
+  message
+});
+
 export const setConnectionState = data => ({
   type: constants.SET_CONNECTION_STATE,
   data
@@ -24,8 +34,8 @@ export const setRecordingState = data => ({
  * Async Actions
  */
 
-export const connectHeadset = () => dispatch => {
+export const connectHeadset = config => dispatch => {
   // Connect board via socket
-  socket.emit("CONNECT_BOARD", { simulate: true });
+  socket.emit(constants.CONNECT_HEADSET, config);
   dispatch(connect());
 };

@@ -4,7 +4,6 @@ import constants from "../constants/headset-action-types";
  * Headset Connection State
  */
 const initialConnectState = {
-  isLoading: false,
   simulate: true
 };
 
@@ -43,7 +42,11 @@ export const recordReducer = (state = initialRecordingState, action) => {
 const initialState = {
   showDialog: false,
   connectState: initialConnectState,
-  recordState: initialRecordingState
+  recordState: initialRecordingState,
+  isLoading: false,
+  isConnected: false,
+  isRecording: false,
+  message: null
 };
 
 export default (state = initialState, action) => {
@@ -52,6 +55,27 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showDialog: action.show
+      };
+    }
+    case constants.CONNECT_HEADSET: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+    case constants.CONNECT_HEADSET_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        isConnected: true
+      };
+    }
+    case constants.CONNECT_HEADSET_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isConnected: false,
+        message: action.message
       };
     }
     case constants.SET_CONNECTION_STATE: {

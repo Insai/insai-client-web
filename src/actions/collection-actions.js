@@ -1,5 +1,5 @@
 import constants from "../constants/collection-action-types";
-import {request, response} from "./actions";
+import { request, response } from "./actions";
 
 /**
  * Authentication
@@ -24,11 +24,11 @@ export const convertToken = async token => {
  * Retrieve
  */
 
- export const parseItems = data => {
+export const parseItems = data => {
   const keys = Object.keys(data.list);
   const items = keys.map(key => data.list[key]);
   return items;
- }
+};
 // fetch items
 export const fetchData = () => async dispatch => {
   // get access token from localstorage
