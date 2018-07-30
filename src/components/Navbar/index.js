@@ -6,6 +6,9 @@ export default class extends React.PureComponent {
   render() {
     return (
       <Navbar className={Classes.DARK}>
+        <Navbar.Group align={Alignment.LEFT}>
+          <Button icon="folder-open" text="recordings" minimal />
+        </Navbar.Group>
         <Navbar.Group align={Alignment.RIGHT}>
           {this.props.isConnected && <RecordControls {...this.props} />}
           {this.props.isConnected ? (
