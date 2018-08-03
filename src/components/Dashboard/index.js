@@ -13,16 +13,16 @@ import BandPower from "../vizualizations/BandPower";
 
 const ELEMENT_MAP = {
   a: {
+    title: "BandPower",
+    Component: BandPower
+  },
+  b: {
     title: "TimeSeries",
     Component: TimeSeries
   },
-  b: {
+  c: {
     title: "FFT",
     Component: FFT
-  },
-  c: {
-    title: "BandPower",
-    Component: BandPower
   },
   new: "New"
 };

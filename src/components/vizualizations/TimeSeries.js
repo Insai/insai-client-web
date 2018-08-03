@@ -1,31 +1,47 @@
 import React from "react";
 import * as d3 from "d3";
-import dataSample from "./cyton-sample.data";
+import { Colors } from "@blueprintjs/core";
+
+const colors = [
+  Colors.VERMILION1,
+  Colors.ROSE1,
+  Colors.VIOLET1,
+  Colors.INDIGO1,
+  Colors.COBALT1,
+  Colors.TURQUOISE1,
+  Colors.FOREST1,
+  Colors.LIME1,
+  Colors.GOLD1,
+  Colors.SEPIA1,
+  Colors.VERMILION4,
+  Colors.VIOLET4,
+  Colors.TURQUOISE4,
+  Colors.LIGHT_GRAY4,
+  Colors.SEPIA4,
+  Colors.FOREST4
+];
 
 const styles = {
-  height: 700,
-  width: 600,
+  height: 380,
+  width: 1000,
   margin: {
-    left: 50,
+    left: 60,
     right: 10,
-    top: 10,
-    bottom: 50
+    top: 20,
+    bottom: 60
   }
 };
 // number of channels on Cyton board
-const CHANNELS = 16;
+const N_CHANNELS = 16;
 
 // Graph constants
-const MIN_X = -2.0,
-  MAX_X = 2.0,
-  X_SCALE = 10000,
-  N_SAMPLES = 10;
+const MIN_X = -0.0002,
+  MAX_X = 0.0002;
 
 export default class extends React.Component {
   state = {
     data: [],
-    ch1: null,
-    ch2: null,
+    channels: [],
     lineGenerator: d3.line(),
     xScale: d3
       .scaleTime()
@@ -41,7 +57,6 @@ export default class extends React.Component {
     if (!nextProps.dataState.channelData.length > 0) return null; // data hasn't been loaded yet
     const { dataState } = nextProps;
     const { lineGenerator, xScale, yScale, data } = prevState;
-
     // data has changed -> recalculate scale domains
     const newData = [
       ...data,
@@ -53,21 +68,20 @@ export default class extends React.Component {
     xScale.domain(timeDomain);
     yScale.domain([recordMin, recordMax]);
 
-    // calculate lines for different channels
-    lineGenerator.x(d => xScale(d.timestamp));
-    lineGenerator.y(d => yScale(d.channelData[0]));
-    const ch1 = lineGenerator(newData);
-
-    lineGenerator.y(d => yScale(d.channelData[1]));
-    const ch2 = lineGenerator(newData);
-
-    lineGenerator.y(d => yScale(d.channelData[2]));
-    const ch3 = lineGenerator(newData);
+    // return array of calculated lines for different channels
+    const channels = Array(N_CHANNELS)
+      .fill()
+      .map((_, i) =>
+        newData.map(d => ({ timestamp: d.timestamp, value: d.channelData[i] }))
+      )
+      .map((ch, i) => {
+        lineGenerator.x(d => xScale(d.timestamp));
+        lineGenerator.y(d => yScale(d.value));
+        return lineGenerator(ch);
+      });
 
     return {
-      ch1,
-      ch2,
-      ch3,
+      channels,
       data: newData.slice(newData.length - 100, newData.length)
     };
   }
@@ -76,7 +90,7 @@ export default class extends React.Component {
     setTimeout(() => {
       d3.select(this.refs.xAxis).call(this.xAxis);
       d3.select(this.refs.yAxis).call(this.yAxis);
-    }, 1000);
+    }, 10000);
   }
   componentDidMount() {
     d3.select(this.refs.xAxis).call(this.xAxis);
@@ -85,9 +99,15 @@ export default class extends React.Component {
   render() {
     return (
       <svg width={styles.width} height={styles.height}>
-        <path d={this.state.ch1} fill="none" stroke="#add" strokeWidth="2" />
-        <path d={this.state.ch2} fill="none" stroke="#ada" strokeWidth="2" />
-        <path d={this.state.ch3} fill="none" stroke="#dad" strokeWidth="2" />
+        {this.state.channels.map((d, i) => (
+          <path
+            d={d}
+            fill="none"
+            strokeWidth="2"
+            stroke={colors[i]}
+            key={`channel_${i}`}
+          />
+        ))}
         <g>
           <g
             ref="xAxis"
