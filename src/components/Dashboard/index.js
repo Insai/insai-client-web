@@ -7,9 +7,9 @@ import {
 } from "react-mosaic-component";
 import { Button } from "@blueprintjs/core";
 import styled from "styled-components";
-import TimeSeries from "./TimeSeries";
-import FFT from "./FFT";
-import BandPower from "./BandPower";
+import TimeSeries from "../vizualizations/TimeSeries";
+import FFT from "../vizualizations/FFT";
+import BandPower from "../vizualizations/BandPower";
 
 const ELEMENT_MAP = {
   a: {
