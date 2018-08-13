@@ -1,13 +1,25 @@
 import React from "react";
-import { Navbar, Classes, Alignment, Button, Intent } from "@blueprintjs/core";
+import {
+  Navbar,
+  Classes,
+  Alignment,
+  Button,
+  Intent,
+  NavbarDivider
+} from "@blueprintjs/core";
 import RecordControls from "./RecordControls";
+import PageNav from "./PageNav";
 
 export default class extends React.PureComponent {
   render() {
     return (
       <Navbar className={Classes.DARK}>
         <Navbar.Group align={Alignment.LEFT}>
-          <Button icon="folder-open" text="recordings" minimal />
+          <PageNav />
+          <NavbarDivider />
+          {this.props.location.pathname === "/" && (
+            <Button icon="folder-open" text="recordings" minimal />
+          )}
         </Navbar.Group>
         <Navbar.Group align={Alignment.RIGHT}>
           {this.props.isConnected && <RecordControls {...this.props} />}

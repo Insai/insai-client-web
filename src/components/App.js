@@ -4,7 +4,8 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import Dashboard from "./DashboardContainer";
+import BrainDashboard from "./BrainDashboardContainer";
+import KnowledgeDashboard from "./KnowledgeDashboardContainer";
 import Navbar from "./NavbarContainer";
 import HeadsetDialog from "./HeadsetDialogContainer";
 import reducers from "../reducers";
@@ -12,10 +13,13 @@ import reducers from "../reducers";
 const Main = () => (
   <BrowserRouter>
     <div>
-      <Navbar />
+      <Switch>
+        <Navbar />
+      </Switch>
       <HeadsetDialog />
       <Switch>
-        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/" component={BrainDashboard} />
+        <Route path="/knowledge" component={KnowledgeDashboard} />
       </Switch>
     </div>
   </BrowserRouter>
