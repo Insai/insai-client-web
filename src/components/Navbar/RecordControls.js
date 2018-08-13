@@ -1,13 +1,15 @@
 import React from "react";
-import { NavbarDivider, Button } from "@blueprintjs/core";
+import { NavbarDivider, Button, Intent } from "@blueprintjs/core";
 import styled from "styled-components";
 
-const ControlsContainer = styled.div``;
+const ControlsContainer = styled.div`
+  display: flex;
+`;
 
-export default class extends React.PureComponent {
+export class RecordingControls extends React.PureComponent {
   render() {
     return [
-      <ControlsContainer key="controls-container">
+      <div key="controls-container">
         {this.props.isRecording ? (
           <Button icon="pause" onClick={this.props.stopHeadset} />
         ) : (
@@ -18,8 +20,34 @@ export default class extends React.PureComponent {
           minimal
           onClick={this.props.openDialog}
         />
-      </ControlsContainer>,
+      </div>,
       <NavbarDivider key="controls-divider" />
     ];
+  }
+}
+
+export default class extends React.PureComponent {
+  render() {
+    return (
+      <ControlsContainer>
+        {this.props.isConnected && <RecordingControls {...this.props} />}
+        {this.props.isConnected ? (
+          <Button
+            text="Disconnect"
+            rightIcon="predictive-analysis"
+            intent={Intent.DANGER}
+            onClick={this.props.disconnectHeadset}
+            // loading={this.props.isLoading}
+          />
+        ) : (
+          <Button
+            text="Connect"
+            rightIcon="predictive-analysis"
+            onClick={this.props.openDialog}
+            intent={Intent.PRIMARY}
+          />
+        )}
+      </ControlsContainer>
+    );
   }
 }

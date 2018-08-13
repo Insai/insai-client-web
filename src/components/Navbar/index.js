@@ -4,16 +4,18 @@ import {
   Classes,
   Alignment,
   Button,
-  Intent,
-  NavbarDivider
+  NavbarDivider,
+  Icon
 } from "@blueprintjs/core";
+import { IconNames } from "@blueprintjs/icons";
+import { Link } from "react-router-dom";
 import RecordControls from "./RecordControls";
 import PageNav from "./PageNav";
 
 export default class extends React.PureComponent {
   render() {
     return (
-      <Navbar className={Classes.DARK}>
+      <Navbar className={Classes.DARK} fixedToTop>
         <Navbar.Group align={Alignment.LEFT}>
           <PageNav />
           <NavbarDivider />
@@ -22,23 +24,11 @@ export default class extends React.PureComponent {
           )}
         </Navbar.Group>
         <Navbar.Group align={Alignment.RIGHT}>
-          {this.props.isConnected && <RecordControls {...this.props} />}
-          {this.props.isConnected ? (
-            <Button
-              text="Disconnect"
-              rightIcon="predictive-analysis"
-              intent={Intent.DANGER}
-              onClick={this.props.disconnectHeadset}
-              // loading={this.props.isLoading}
-            />
-          ) : (
-            <Button
-              text="Connect"
-              rightIcon="predictive-analysis"
-              onClick={this.props.openDialog}
-              intent={Intent.PRIMARY}
-            />
-          )}
+          <RecordControls {...this.props} />
+          <NavbarDivider />
+          <Link to="/account" className="bp3-button">
+            <Icon icon={IconNames.USER} />
+          </Link>
         </Navbar.Group>
       </Navbar>
     );

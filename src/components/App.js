@@ -6,9 +6,15 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import BrainDashboard from "./BrainDashboardContainer";
 import KnowledgeDashboard from "./KnowledgeDashboardContainer";
+import Account from "./AccountContainer";
 import Navbar from "./NavbarContainer";
 import HeadsetDialog from "./HeadsetDialogContainer";
 import reducers from "../reducers";
+import styled from "styled-components";
+
+const MainContainer = styled.section`
+  margin-top: 50px;
+`;
 
 const Main = () => (
   <BrowserRouter>
@@ -16,11 +22,14 @@ const Main = () => (
       <Switch>
         <Navbar />
       </Switch>
-      <HeadsetDialog />
       <Switch>
-        <Route exact path="/" component={BrainDashboard} />
-        <Route path="/knowledge" component={KnowledgeDashboard} />
+        <MainContainer>
+          <Route exact path="/" component={BrainDashboard} />
+          <Route path="/knowledge" component={KnowledgeDashboard} />
+          <Route path="/account" component={Account} />
+        </MainContainer>
       </Switch>
+      <HeadsetDialog />
     </div>
   </BrowserRouter>
 );
