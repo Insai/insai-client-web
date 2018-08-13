@@ -1,23 +1,7 @@
 import React from "react";
-import { Card, Button, Spinner, Intent, Icon } from "@blueprintjs/core";
-import { IconNames } from "@blueprintjs/icons";
+import { Spinner, Intent } from "@blueprintjs/core";
 import styled from "styled-components";
-
-const ListContainer = styled.section`
-  height: 100%;
-`;
-
-const CardContent = styled.div`
-  display: flex;
-  align-items: center;
-  & h5 {
-    padding: 10px;
-    width: 350px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`;
+import PocketList from "./PocketList";
 
 const SpinnerContainer = styled.div`
   width: 100%;
@@ -26,33 +10,6 @@ const SpinnerContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-class PocketList extends React.PureComponent {
-  render() {
-    return (
-      <ListContainer>
-        {this.props.items.map(item => (
-          <Card key={item.item_id}>
-            <CardContent>
-              <Icon
-                icon={
-                  Number(item.is_article)
-                    ? IconNames.ALIGN_LEFT
-                    : IconNames.APPLICATION
-                }
-              />
-              <h5>
-                <a href={item.resolved_url}>
-                  {item.resolved_title || item.resolved_url}
-                </a>
-              </h5>
-            </CardContent>
-          </Card>
-        ))}
-      </ListContainer>
-    );
-  }
-}
 
 class KnowledgeDashboard extends React.Component {
   state = {};
@@ -67,7 +24,8 @@ class KnowledgeDashboard extends React.Component {
         </SpinnerContainer>
       );
     }
-    return <PocketList items={this.props.items} />;
+    const sortedItems = this.props.items.sort((a, b) => a.sort_id > b.sort_id);
+    return <PocketList items={sortedItems} />;
   }
 }
 
